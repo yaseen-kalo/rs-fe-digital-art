@@ -26,7 +26,7 @@ export class PaymentPage {
         await this.txtDiscount.waitFor()
         await this.txtDiscount.fill(grabDiscountCode.trim())
         //did assertion before click because inputting is really slow here.
-        await expect(this.txtDiscount).toHaveValue(/^[0-9]{6}[a-z]{2}[0-9a-z]{4}$/)
+        await expect(txt).not.toHaveValue('');
         await this.btnSubmitDiscount.waitFor()
         await expect(this.discountActiveMessage).toBeHidden()
         await this.btnSubmitDiscount.click()

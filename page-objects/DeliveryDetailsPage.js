@@ -22,7 +22,7 @@ export class DeliveryDetailsPage {
 
     filltheDeliveryDetails = async(userAddress) => {
 
-        // console.log(userAddress)
+        console.log(userAddress)
         
         await this.fName.waitFor()
         await this.fName.fill(userAddress.firstName)
