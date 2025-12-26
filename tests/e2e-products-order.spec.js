@@ -33,7 +33,8 @@ test("e2e Product Order Test", async({page}) => {
     await loginPage.navigateToRegisterPage()
 
     const email = faker.internet.username()
-    const password = faker.internet.password()
+    //just hardcoded it so, I can run github action properly, locally I am generating new password again and again
+    const password = "P@ssw0rd!"
     await signupPage.createandSaveNewAccount(email, password)
 
     await deliveryDetailsPage.filltheDeliveryDetails(userAddress)

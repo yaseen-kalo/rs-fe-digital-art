@@ -19,6 +19,7 @@ export class SignupPage {
         
         await this.password.fill(password)
 
+        // const credentials = { username: email, password: password };
         const credentials = { username: email, password: password };
 
         // ------------------------
@@ -27,7 +28,7 @@ export class SignupPage {
         const envFilePath = path.resolve(process.cwd(), ".env");
 
         // Append password to .env (or overwrite existing)
-        fs.writeFileSync(envFilePath, `PASSWORD=${password}\n`, { flag: "w" });
+        fs.writeFileSync(envFilePath, `PASSWORD=${credentials.password}\n`, { flag: "w" });
 
         // ------------------------
         // Save email to JSON
