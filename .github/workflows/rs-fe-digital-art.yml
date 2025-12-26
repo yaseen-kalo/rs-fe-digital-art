@@ -21,9 +21,14 @@ jobs:
           node-version: 20
       - name: Run Tests
         run: |
+          echo "Install dependencies from lockfile"
+          npm ci
+
+          echo "Install Playwright browsers"
+          npx playwright install --with-deps
+
           echo "Start the shopping store Application"
           chmod +x ./shopping-store-linux-amd64 && ./shopping-store-linux-amd64 &
-          echo "Install dependencies from lockfile"
-          npm install
+
           echo "Run playwright tests"
           npm run test:ci
