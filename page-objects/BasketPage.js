@@ -27,8 +27,8 @@ export class BasketPage {
                 cheapestIndex = i
             }
         }
-        console.log("Index: " + cheapestIndex)
-        console.log("Price: " + cheapestPrice)
+        // console.log("Index: " + cheapestIndex)
+        // console.log("Price: " + cheapestPrice)
 
         // ensures we found at least one product.
         if (cheapestIndex !== -1)

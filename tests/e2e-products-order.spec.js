@@ -6,18 +6,20 @@ import { LoginPage } from "../page-objects/LoginPage"
 import { SignupPage } from "../page-objects/SignupPage"
 import { DeliveryDetailsPage } from "../page-objects/DeliveryDetailsPage"
 import { deliveryDetails as userAddress } from "../data/deliveryDetails"
+import { PaymentPage } from "../page-objects/PaymentPage"
+import { creditCard } from "../data/creditCardDetails"
 
-import Chance from "chance"
+import { faker } from '@faker-js/faker'; 
 
-test.only("e2e Product Order Test", async({page}) => {
+test("e2e Product Order Test", async({page}) => {
     const productsPage = new ProductsPage(page)
     const navigationBar = new NavigationBar(page)
     const basketPage = new BasketPage(page)
     const loginPage = new LoginPage(page)
     const signupPage = new SignupPage(page)
     const deliveryDetailsPage = new DeliveryDetailsPage(page)
+    const paymentPage = new PaymentPage(page)
 
-    const chance = new Chance()
     await productsPage.visit()
     
     await productsPage.addProductToBasket("Mountain Landscape")
@@ -30,12 +32,20 @@ test.only("e2e Product Order Test", async({page}) => {
     await basketPage.continueToCheckOut()
     await loginPage.navigateToRegisterPage()
 
-    const email = chance.email()
-    const password = chance.string({length: 13})
-    await signupPage.createNewAccount(email, password)
+    const email = faker.internet.username()
+    const password = faker.internet.password()
+    await signupPage.createandSaveNewAccount(email, password)
 
     await deliveryDetailsPage.filltheDeliveryDetails(userAddress)
-    await page.waitForTimeout(3000)
+
+    await deliveryDetailsPage.saveAddress()
+    await deliveryDetailsPage.continueToPayment()
+    await paymentPage.submitDiscount()
+
+    await paymentPage.fillPaymentDetails(creditCard)
+    await paymentPage.placeAnOrder()
+    await page.waitForTimeout(5000)
+    // await page.pause()
 })
 
 
