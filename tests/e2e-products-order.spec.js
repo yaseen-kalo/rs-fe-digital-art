@@ -39,6 +39,7 @@ test("e2e Product Order Test", async({page}) => {
 
     await deliveryDetailsPage.filltheDeliveryDetails(userAddress)
 
+    await page.waitForTimeout(3000)
     await deliveryDetailsPage.saveAddress()
     await deliveryDetailsPage.continueToPayment()
     await paymentPage.submitDiscount()

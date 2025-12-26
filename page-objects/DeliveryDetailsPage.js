@@ -84,7 +84,6 @@ export class DeliveryDetailsPage {
         const savedCountry = await savedContainer.locator(this.savedCountryLocator)
 
         //assertion
-
         await expect(savedFirstName).toHaveText(txtFirstName)
         await expect(savedlastName).toHaveText(txtLastName)
         await expect(savedStreet).toHaveText(txtStreet)
